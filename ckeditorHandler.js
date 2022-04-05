@@ -13,6 +13,11 @@ class CkeditorHandler {
               uiColor: '#9AB8F3'
             }
           );
+        CKEDITOR.config.forcePasteAsPlainText = false;
+        CKEDITOR.config.pasteFromWordRemoveFontStyles = false;
+        CKEDITOR.config.pasteFromWordRemoveStyles = false;
+        CKEDITOR.config.allowedContent = true;
+        CKEDITOR.config.pasteFilter = null;
         // Handle when the HTML changes.
         bodyEditor.on('change', function () {
           const previewElement = document.querySelector('#preview');
