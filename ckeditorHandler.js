@@ -2,19 +2,23 @@
 
 class CkeditorHandler {
   classicEditorResourceUrl = 'https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js';
-  classicEditorSelector = 'classic-editor';
+  classicEditorSelector = 'editor';
 
   initClassicCkeditor() {
-    this.loadScript(this.classicEditorResourceUrl).then(() => {
-      CKEDITOR
-        .replace(document.querySelector('#classic-editor'),
-          {
-            uiColor: '#9AB8F3'
-          }
-        )
-    })
+    this.loadScript(this.classicEditorResourceUrl)
+      .then(() => {
+        const bodyEditor = CKEDITOR
+          .replace(document.querySelector('#editor'),
+            {
+              uiColor: '#9AB8F3'
+            }
+          );
+        // Handle when the HTML changes.
+        bodyEditor.on('change', function () {
+          this.previewSourceHTML();
+        });
+      })
   }
-
   loadScript(scriptPath) {
     return new Promise((resolve, reject) => {
       const hasScript = document.querySelector(`script[src="${scriptPath}"]`);
@@ -29,5 +33,9 @@ class CkeditorHandler {
       script.onerror = () => reject('failed');
       document.body.appendChild(script);
     });
+  }
+  previewSourceHTML() {
+    const previewElement = document.querySelector('#preview');
+    previewElement.value = CKEDITOR.instances.editor.getData();
   }
 }

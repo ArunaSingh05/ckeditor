@@ -19,16 +19,21 @@ error_reporting(E_ALL);
   <script src="./ckeditorHandler.js"></script>
 </head>
 <body>
-	<div id="classic-editor">
-    <p>Here goes the initial content of the editor1.</p>
+
+	<div id="editor">
+    <p>Here goes the initial content of the editor</p>
 	</div>
+
+	<h2>Preview</h2>
+	<textarea id="preview" style="height:100%;width:500px;min-height:500px">
+   
+	</textarea>
 	<!-- Script -->
 	<script type="text/javascript">
 		let ckeditorObj =  new CkeditorHandler();
 		console.log(ckeditorObj);
 		// Initialize CKEditor
 		ckeditorObj.initClassicCkeditor();
-		// ckeditorObj.initInlineCkeditor();
 	</script>
 </body>
 </html>
