@@ -15,7 +15,8 @@ class CkeditorHandler {
           );
         // Handle when the HTML changes.
         bodyEditor.on('change', function () {
-          this.previewSourceHTML();
+          const previewElement = document.querySelector('#preview');
+          previewElement.value = CKEDITOR.instances.editor.getData();
         });
       })
   }
@@ -33,9 +34,5 @@ class CkeditorHandler {
       script.onerror = () => reject('failed');
       document.body.appendChild(script);
     });
-  }
-  previewSourceHTML() {
-    const previewElement = document.querySelector('#preview');
-    previewElement.value = CKEDITOR.instances.editor.getData();
   }
 }
